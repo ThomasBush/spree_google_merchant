@@ -4,7 +4,7 @@ xml.tag! "g:id", variant.sku.to_s
 xml.tag! "g:title", manager.title(variant)
 xml.tag! "g:description", variant.product.description
 xml.tag! "g:link", production_domain + manager.variant_path(variant)
-xml.tag! "g:image_link", variant.advertising_image_url.gsub(/^\//, 'http:/') if variant.advertising_image
+xml.tag! "g:image_link", variant.product.images.first.attachment.url if variant.product.images.present?
 xml.tag! "g:condition", "new"
 xml.tag! "g:availability", in_stock.include?(variant.id) ? 'in stock' : 'out of stock'
 xml.tag! "g:price", "#{variant.default_price.display_amount.money} #{variant.default_price.currency}"
